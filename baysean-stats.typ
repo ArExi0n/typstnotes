@@ -1,4 +1,4 @@
-#set document(title: "Title")
+#set document(title: "Bayesian Stats")
 #set page(paper: "us-letter", margin: (x: 1.2in, y: 1in))
 #set text(font: "New Computer Modern", size: 12pt)
 #set par(justify: true, leading: 0.65em)
@@ -28,5 +28,5 @@ align(right)[
 #line(length: 100%, stroke: 0.5pt)
 #v(0.3em)
 
-#align(center, text(size: 18pt, weight: "bold")[Tittle/Topic])
+#align(center, text(size: 18pt, weight: "bold")[Bayesian Stats])
 #v(1em)

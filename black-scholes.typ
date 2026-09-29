@@ -145,5 +145,5 @@ $
 
 Where $W_t$ is a Wiener process.
 
-= Applications
+= Black-Scholes Partial Differential Equations
 
