@@ -13,7 +13,7 @@
   footer: [
     #set text(size: 9pt, fill: luma(130))
     #line(length: 100%, stroke: 0.4pt + luma(200))
-    #align(center)[#counter(page).display("1")]
+    #align(center)[#context counter(page).display("1")]
   ]
 )
 #set text(font: "New Computer Modern", size: 11pt)

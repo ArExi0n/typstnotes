@@ -24,7 +24,7 @@ fn main() {
 
     println!(
         "gradient at ({:.0}, {:.0}): [{:.2}, {:.2}]",
-        point[0], point[1], grad[0], grad[0]
+        point[0], point[1], grad[0], grad[1]
     );
 
     println!("Gradient magnitude: {:.2}", magnitude);

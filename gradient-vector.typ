@@ -3,11 +3,14 @@
 #set text(font: "New Computer Modern", size: 12pt)
 #set par(justify: true, leading: 0.65em)
 
-#let code-block(number, code) = {
+// Dark syntax highlighting for code blocks (OneDark theme)
+#show raw: set raw(theme: "onedark.tmTheme")
+
+#let code-block(number, body) = {
   block(
     width: 100%,
-    fill: rgb("#111110"),
-    stroke: 1pt + rgb("#1c1c1b"),
+    fill: rgb("#282c34"),
+    stroke: 1pt + rgb("#3d3d3d"),
     radius: 10pt,
     inset: 14pt,
   )[
@@ -31,19 +34,28 @@
 
     #v(12pt)
 
-    #raw(
-      code,
-      lang: "rust",
-      block: true,
+    #show raw.where(block: true): block.with(
+      width: 100%,
+      fill: rgb("#282c34"),
+      radius: 6pt,
+      inset: 10pt,
+      stroke: none,
     )
+
+    #show raw: set text(
+      fill: rgb("#e8e8e8"),
+      size: 9pt,
+    )
+
+    #body
   ]
 }
 
-#let output-block(number, output) = {
+#let output-block(number, body) = {
   block(
     width: 100%,
-    fill: rgb("#111110"),
-    stroke: 1pt + rgb("#1c1c1b"),
+    fill: rgb("#282c34"),
+    stroke: 1pt + rgb("#3d3d3d"),
     radius: 10pt,
     inset: 14pt,
   )[
@@ -69,14 +81,11 @@
 
     #block(
       width: 100%,
-      fill: rgb("#252523"),
+      fill: rgb("#282c34"),
       radius: 5pt,
       inset: 12pt,
     )[
-      #raw(
-        block: true,
-        output,
-      )
+      #body
     ]
   ]
 }
@@ -93,14 +102,16 @@
   v(0.3em)
 }
 
-#grid( 
-  columns: (5fr, 10fr), align(left)[ 
+#grid(
+  columns: (5fr, 10fr),
+  align(left)[
     The Gradient Vector by
     Michael Brenndoerfer
-], 
-align(right)[ 
-  #datetime.today().display("[month repr:long] [day], [year]") 
-])
+  ],
+  align(right)[
+    #datetime.today().display("[month repr:long] [day], [year]")
+  ],
+)
 
 #line(length: 100%, stroke: 0.5pt)
 
@@ -109,7 +120,7 @@ align(right)[
 
 == Introduction
 
-Collecting all partial derivatives of a function into a single vector gives us the gradient,a fundamental object in optimization.
+Collecting all partial derivatives of a function into a single vector gives us the gradient, a fundamental object in optimization.
 
 The gradient represents the multivariable generalization of the derivative.
 
@@ -117,7 +128,7 @@ While a single-variable derivative tells us the rate of change in the only direc
 
 This makes the gradient more than a collection of sensitivities; it is a directional guide pointing toward improvement.
 
-#block(width: 100%, inset: 10pt , radius: 8pt, stroke: 1pt + rgb("#26384a"))[
+#block(width: 100%, inset: 10pt, radius: 8pt, stroke: 1pt + rgb("#26384a"))[
   === Gradient
 
   #v(1pt)
@@ -139,7 +150,7 @@ This makes the gradient more than a collection of sensitivities; it is a directi
   #v(0.5pt)
   where :
 
-  - $nabla f:$ the gradient operator(nable) applied to $f$, producing a vector
+  - $nabla f:$ the gradient operator (nabla) applied to $f$, producing a vector
   - $frac(partial f, partial x_i)$ : the partial derivative of $f$ with respect to the $i$-th variable
   - $n$: the dimension of the input space
 
@@ -150,24 +161,25 @@ When $nabla f$ is nonzero, it points in the direction of steepest ascent among E
 
 == Direction of Steepest Ascent
 
-The gradient's direction has a precise interpretation when it is nonzero: among Euclidean unit directions, $nabla f$/$||nabla f||$ maximizes the directional derivative.
+The gradient's direction has a precise interpretation when it is nonzero: among Euclidean unit directions, $(nabla f)/(||nabla f||)$ maximizes the directional derivative.
 
 Its magnitude is that maximum first-order rate of increase.
 
 This property makes the gradient the workhorse of optimization algorithms, as we will see shortly.
 
-To understand this result, consider the directional derivative $Dif_u f = nabla f^T_u$ for a Euclidean unit vector $u$.
+To understand this result, consider the directional derivative $D_u f = nabla f dot u$ for a Euclidean unit vector $u$.
 
-The Cauchy-Schwarz inequality gives $Dif_u f <= ||nabla f||$, with equality in the normalized gradient direction when the gradient is nonzero; the opposite direction gives steepest descent.
+The Cauchy-Schwarz inequality gives $D_u f <= ||nabla f||$, with equality in the normalized gradient direction when the gradient is nonzero; the opposite direction gives steepest descent.
 
 If the gradient is zero, every first-order directional derivative is zero, so no unique steepest direction exists.
 
-The magnitude of the gradient, computed as $|| nabla f || = sqrt(sum_i (partial f "/" partial x_i)^2)$
+The magnitude of the gradient, computed as $|| nabla f || = sqrt(sum_i (frac(partial f, partial x_i))^2)$
 
-tell us how rapidly the function is changing in the steepest direction. A large gradient magnitude indicates a region where the function is changing rapidly;
-a small magnitude indicates a relatively flat region.When the gradient magnitude in exactly zero, we have reached a critical point where the function has no preffered direction of change, which typically indicates a local min, max, or saddle point. 
+Tell us how rapidly the function is changing in the steepest direction. A large gradient magnitude indicates a region where the function is changing rapidly;
+a small magnitude indicates a relatively flat region. When the gradient magnitude is exactly zero, we have reached a critical point where the function has no preferred direction of change, which typically indicates a local min, max, or saddle point.
 
-#code-block(7, """
+#code-block(7)[
+```rust
 fn f(x: f64, y: f64) -> f64 {
     x.powi(2) + 2.0 * y.powi(2) - 2.0 * x * y
         + 4.0 * x - 6.0 * y
@@ -200,5 +212,6 @@ fn main() {
     );
 
     println!("Gradient magnitude: {:.2}", magnitude);
-}
-""")
+  }
+```
+]
