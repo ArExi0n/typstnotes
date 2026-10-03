@@ -3,14 +3,79 @@
 #set text(font: "New Computer Modern", size: 12pt)
 #set par(justify: true, leading: 0.65em)
 
-// Dark syntax highlighting for code blocks (OneDark theme)
-#show raw: set raw(theme: "onedark.tmTheme")
+#let visualization-block(number, image-path, caption) = {
+  block(
+    width: 100%,
+    fill: rgb("#f5f5f3"),
+    radius: 14pt,
+    inset: 14pt,
+  )[
+    #grid(
+      columns: (1fr, auto),
+      align: (left, horizon),
 
+      [
+        #text(
+          fill: rgb("#777771"),
+          size: 11pt,
+          font: "JetBrains Mono",
+        )[
+          OUT [#number]:
+        ]
+      ],
+
+      [
+        #text(
+          fill: rgb("#777771"),
+          size: 11pt,
+          font: "JetBrains Mono",
+        )[
+          #box(
+            width: 13pt,
+            height: 13pt,
+            stroke: 1pt + rgb("#777771"),
+            radius: 2pt,
+            inset: 1pt,
+          )[
+            #align(center + horizon)[
+              #text(size: 8pt)[▥]
+            ]
+          ]
+          #h(5pt)
+          Visualization
+        ]
+      ],
+    )
+
+    #v(10pt)
+
+    #block(
+      width: 100%,
+      fill: rgb("#eeeeec"),
+      radius: 7pt,
+      inset: 14pt,
+    )[
+      #image(
+        image-path,
+        width: 100%,
+      )
+
+      #v(12pt)
+
+      #text(
+        size: 10.5pt,
+        fill: rgb("#555550"),
+      )[
+        #caption
+      ]
+    ]
+  ]
+}
 #let code-block(number, body) = {
   block(
     width: 100%,
-    fill: rgb("#282c34"),
-    stroke: 1pt + rgb("#3d3d3d"),
+    fill: rgb("#EDEDED"),
+    stroke: 1pt + rgb("#EDEDED"),
     radius: 10pt,
     inset: 14pt,
   )[
@@ -36,14 +101,14 @@
 
     #show raw.where(block: true): block.with(
       width: 100%,
-      fill: rgb("#282c34"),
+      fill: rgb("#E7E7E9"),
       radius: 6pt,
       inset: 10pt,
       stroke: none,
     )
 
     #show raw: set text(
-      fill: rgb("#e8e8e8"),
+      fill: rgb("#282c34"),
       size: 9pt,
     )
 
@@ -54,41 +119,64 @@
 #let output-block(number, body) = {
   block(
     width: 100%,
-    fill: rgb("#282c34"),
-    stroke: 1pt + rgb("#3d3d3d"),
-    radius: 10pt,
+    fill: rgb("#f5f5f3"),
+    radius: 14pt,
     inset: 14pt,
   )[
     #grid(
       columns: (1fr, auto),
-      align: (left, right),
+      align: (left, horizon),
+
       [
         #text(
-          size: 8pt,
-          fill: rgb("#777773"),
-          weight: "bold",
-        )[OUT [#number]:]
+          fill: rgb("#777771"),
+          size: 11pt,
+          font: "JetBrains Mono",
+        )[
+          OUT [#number]:
+        ]
       ],
+
       [
         #text(
-          size: 9pt,
-          fill: rgb("#aaa9a3"),
-        )[〉 Console]
+          fill: rgb("#777771"),
+          size: 11pt,
+          font: "JetBrains Mono",
+        )[
+          #box(
+            width: 13pt,
+            height: 13pt,
+            stroke: 1pt + rgb("#777771"),
+            radius: 2pt,
+            inset: 1pt,
+          )[
+            #align(center + horizon)[#">_"]
+          ]
+          #h(5pt)
+          Console
+        ]
       ],
     )
 
-    #v(12pt)
+    #v(10pt)
 
     #block(
       width: 100%,
-      fill: rgb("#282c34"),
-      radius: 5pt,
-      inset: 12pt,
+      fill: rgb("#eeeeec"),
+      radius: 7pt,
+      inset: (x: 17pt, y: 16pt),
     )[
+      #set text(
+        font: "JetBrains Mono",
+        size: 12pt,
+        fill: rgb("#3f3f3b"),
+      )
+
       #body
     ]
   ]
 }
+
 
 #show heading.where(level: 1): it => {
   v(1em)
@@ -215,3 +303,28 @@ fn main() {
   }
 ```
 ]
+
+#output-block(8)[
+  Function value at (1, 2): -3.00\
+  Gradient at (1, 2): [2.00, 0.00]\
+  Gradient Magnitude: 2.00
+]
+
+The gradient at (1, 2) is [2,0] meaning the function increases most rapidly in the positive _x_ direction at that point, with no change in the _y_ direction. This tells us that from (1,2) moving in the positive _x_ direction increases the function value, while moving in the positive _y_ direction has no first order effect.
+
+The fact that the y-component of the gradient is zero at this point reveals that we are on a ridge or "valley" in the y-direction.
+
+The function is neither increasing nor decreasing as we vary _y_ while holding _x_ fixed at 1. This doesn't mean we're at the optimum; it just means we're at a stationary point with respect to _y_ at this particular x-value. 
+
+To find the true minimum, we need to find a point where both components of the gradients are zero simultaneously.
+
+#visualization-block(
+  9,
+  "gradient-vector.png",
+  [
+    Gradient vector field overlaid on function contours.
+    Arrows point in the direction of steepest ascent; their
+    lengths are normalized for readability, while color encodes
+    gradient magnitude. The gradient is perpendicular to contour lines.
+  ],
+)
