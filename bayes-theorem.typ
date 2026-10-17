@@ -131,7 +131,13 @@
   ],
 )
 
+#let def = text(style: "italic", [definition:])
+#let proof = text(style: "italic", [proof:])
+
+#show regex("Bayes Thm"): it => [$ P(A | B) = frac(P(B | A) times P(A), P(B)) $]
+
 #line(length: 100%, stroke: 0.5pt)
+
 #v(0.3em)
 
 #align(center, text(size: 18pt, weight: "bold")[Bayes's Theorem])
@@ -277,3 +283,4 @@ The numerator P(M∣D)⋅P(D) represents the probability of both defaulting and 
 ]
 
 The deteriorating margins more than tripled our assessed default probability from 3% to about 11%. This updated probability should inform lending decisions, pricing, and reserve requirements. The magnitude of this update reflects both the strength of the evidence, since deteriorating margins are much more common among defaulters, and the prior belief that default was already considered unlikely.
+
