@@ -78,14 +78,12 @@ Learning the Sicilian Defense for the first time wasn’t as simple as staring a
 
 At this moment of life,I've made peace with the beginner's pain cause its natural cause learning everyday requires this kind of pain tolerance.Well... learning means enduring the discomfort of not knowing, again and again.
 
-At columbia, I'll bring willingness into unfamiliar communities, whether by joining one or starting one myself. I'll listen, let different perspectives unsettle my assumptions, and offer ideas that others can challenge and build upon. I may not know the next move, but I'm willing to stay at the board.
+At Columbia, I'll bring willingness into unfamiliar communities, whether by joining one or starting one myself. I'll listen, let different perspectives unsettle my assumptions, and offer ideas that others can challenge and build upon. I may not know the next move, but I'm willing to stay at the board.
 
 = Columbia adversity essay
 In college/university, students are often challenged in ways that they could not anticipate. Please describe a situation in which you have navigated through adversity and discuss how you changed as a result. (150 words or fewer)
 
 _Word limit: 150 words or fewer._
-
-
 
 = Columbia Why us?
 
@@ -98,4 +96,3 @@ I was one hand raise away from making Economics class to a Plato glazing session
 I always have been that one kid in the class who can't just stay in the class like not literally but still you got it. Right? If I got in may be I will tell Gadfly members how async/await is basically Samuel Beckett's Waiting for Godot: everything is suspended, everyone is waiting for something to resolve, and nobody can guarantee when or whether it will.
 
 Ah, the Core at work: Columbia’s secret circuitry connecting code to conscience. From ADI DevFest and Cookies and Code to CodeColumbia’s Venture Community pitch nights, I want to build, debate, and occasionally overcomplicate things. I can imagine taking my questions from the Philolexian Society’s literary sparring to NYC’s wider tech scene, then into Columbia’s quantitative finance and financial engineering seminars. I hope Columbia gives my tangents a city-sized playground.
-
